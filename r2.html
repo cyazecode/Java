@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>网页访问量统计</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #ff00cc, #00ffcc, #00ccff, #ffcc00);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #FFF;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .counter {
+            font-size: 72px;
+            margin-bottom: 40px;
+            animation: countUp 2s ease-in-out;
+        }
+
+        @keyframes countUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .clock {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 36px;
+            letter-spacing: 5px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            transform-origin: top right;
+            animation: clockAnimation 60s linear infinite;
+        }
+
+        @keyframes clockAnimation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="background"></div>
+<div class="content">
+    <h1>网页访问量统计</h1>
+    <p>欢迎来到我们的网页。</p>
+    <p>当前访问量：<span class="counter">0</span></p>
+    <p>我们提供了丰富多彩的主题内容，快来探索吧！</p>
+</div>
+<div class="clock"></div>
+
+<script>
+    // 模拟访问量增加
+    let counter = 0;
+
+    function increaseCounter() {
+        counter++;
+        document.querySelector('.counter').textContent = counter;
+    }
+
+    // 模拟每秒钟自动增加访问量
+    setInterval(increaseCounter, 1000);
+
+    // 更新当前时间
+    function updateClock() {
+        const clockElement = document.querySelector('.clock');
+        const date = new Date();
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // 模拟每秒钟更新一次当前时间
+    setInterval(updateClock, 1000);
+</script>
+</body>
+</html>

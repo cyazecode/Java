@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>网页访问量统计</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #ff00cc, #00ffcc, #00ccff, #ffcc00);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #FFF;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            animation: glowAnimation 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowAnimation {
+            0% {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            100% {
+                text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        p {
+            font-size: 24px;
+            margin-bottom: 20px;
+            animation: slideInAnimation 1s ease-in-out;
+        }
+
+        @keyframes slideInAnimation {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .counter {
+            font-size: 72px;
+            margin-bottom: 40px;
+            animation: countUp 2s ease-in-out;
+        }
+
+        @keyframes countUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .clock {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 36px;
+            letter-spacing: 5px;
+            color: #fff;
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+            animation: flickerAnimation 1s ease-in-out infinite;
+            transform-origin: top center;
+            perspective: 1000px;
+        }
+
+        @keyframes flickerAnimation {
+            0% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 0.4;
+            }
+            100% {
+                opacity: 0.8;
+            }
+        }
+
+        .clock .hours,
+        .clock .minutes,
+        .clock .seconds {
+            display: inline-block;
+            animation: clockAnimation 60s linear infinite;
+        }
+        @keyframes clockAnimation {
+            0% {
+                transform: rotateZ(0);
+            }
+            100% {
+                transform: rotateZ(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="background"></div>
+<div class="content">
+    <h1>欢迎来到我们的网页！</h1>
+    <p>这里有令人兴奋的内容等待着您的发现。</p>
+    <p>当前网页访问量：<span class="counter">0</span></p>
+    <p>我们时刻关注您的光临。</p>
+</div>
+<div class="clock">
+    <div class="hours"></div>
+    <div class="minutes"></div>
+    <div class="seconds"></div>
+</div>
+<script>
+    // 模拟访问量增加
+    let counter = 0;
+    function increaseCounter() {
+        counter++;
+        document.querySelector('.counter').textContent = counter;
+    }
+
+    // 模拟每秒钟自动增加访问量
+    setInterval(increaseCounter, 1000);
+
+    // 更新当前时间
+    function updateClock() {
+        const clockElement = document.querySelector('.clock');
+        const hoursElement = clockElement.querySelector('.hours');
+        const minutesElement = clockElement.querySelector('.minutes');
+        const secondsElement = clockElement.querySelector('.seconds');
+        const date = new Date();
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        hoursElement.textContent = hours;
+        minutesElement.textContent = minutes;
+        secondsElement.textContent = seconds;
+    }
+
+    // 模拟每秒钟更新一次当前时间
+    setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
+
